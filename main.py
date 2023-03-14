@@ -1,9 +1,9 @@
-
-
+from dotenv import load_dotenv
+import ai
 
 
 def main():
-    print("Hello World")
+    load_dotenv()
 
 
 if __name__ == "__main__":
