@@ -11,6 +11,7 @@ def parse_arguments():
     parser.add_argument('--output_file', '-o', type=str, help='Output file', required=True)
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=False)
     parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
+    parser.add_argument('--view_code_only', '-v', help='View code without running', action='store_true')
     #TODO add "inspect only" option
     args = parser.parse_args()
     return args
@@ -43,8 +44,11 @@ def main():
         else:
             conversion_code = alias_manager.load_code(args.alias)
 
-    output_file_content = run_function(conversion_code, input_file_content)
-    write_output_file(args.output_file, output_file_content)
+    if not args.view_code_only:
+        output_file_content = run_function(conversion_code, input_file_content)
+        write_output_file(args.output_file, output_file_content)
+    else:
+        print(conversion_code)
 
     # print(result)
 
