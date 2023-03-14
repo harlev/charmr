@@ -9,7 +9,7 @@ def run_function(code_string, parameter):
     exec(compiled_code, function_namespace)
 
     # Get the function from the namespace
-    function = function_namespace.get('my_function')
+    function = function_namespace.get('file_convert')
 
     # Call the function with the given parameter
     result = function(parameter)

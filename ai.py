@@ -18,5 +18,10 @@ def get_code(prompt: str):
         max_tokens=2048
         )
 
-    return response["choices"][0]["message"]["content"]
+    code = response["choices"][0]["message"]["content"]
+    code = code.strip("```")
+
+    return code
+
+
 
