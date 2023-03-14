@@ -8,6 +8,7 @@ def parse_arguments():
     parser.add_argument('--input_file', '-i', type=str, help='Input file', required=True)
     parser.add_argument('--output_file', '-o', type=str, help='Output file', required=True)
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=True)
+    parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
     args = parser.parse_args()
     return args
 
