@@ -53,4 +53,23 @@ a,b,c,ac
 4,5,6,24
 ```
 
+#### Conversion Logic
+input `csv`
+```
+day,month,year
+11,3,2021
+2,8,1999
+```
+conversion `input a csv file with day,month,year column headers. output a JSON file with an extra field which is the unix timestamp for the date represented in each row"`  
+output `json`
+```json
+[{"day": "11", "month": "3", "year": "2021", "timestamp": 1615449600}, {"day": "2", "month": "8", "year": "1999", "timestamp": 933577200}]
+```
+
+
+### Disclaimer
+The success of each conversion depends on GPT-3.5 generating the correct code for the task.
+It also depends on the conversion string correctly describing the input and the logic of manipulating it.  
+
+
 ### Security / Safety
