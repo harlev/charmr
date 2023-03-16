@@ -45,10 +45,12 @@ a, b, c
 1, 2, 3
 4, 5, 6
 ```
-conversion `move column a after column c. create a new column ac with the multiplication of a and c`  
-output `json`
-```json
-[{"a": "1", " b": " 2", " c": " 3"}, {"a": "4", " b": " 5", " c": " 6"}]
+conversion `the input file is a CSV with column heasers a,b,c. the output file is a CSV. create a new column ac with the multiplication of a and c`  
+output `csv`
+```
+a,b,c,ac
+1,2,3,3
+4,5,6,24
 ```
 
 ### Security / Safety
