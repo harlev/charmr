@@ -8,7 +8,7 @@ You will output a python function that accepts the text of the source file as a 
 The function name will be "file_convert". 
 Generate only the code, with no comments. 
 Don't generate any wrapper to the code. 
-The output should be compilable as python code, version 3.10.
+The output should be compilable as python code, version 3.8.
 prefer string manipulation over using external packages where possible. 
 Do not output any explanation."""
 

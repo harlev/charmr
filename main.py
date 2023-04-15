@@ -12,7 +12,6 @@ def parse_arguments():
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=False)
     parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
     parser.add_argument('--view_code_only', '-v', help='View code without running', action='store_true')
-    #TODO add "inspect only" option
     args = parser.parse_args()
     return args
 

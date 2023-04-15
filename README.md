@@ -3,6 +3,16 @@
 
 This application will convert, transform, filter etc. any text based common file format into another file, based on a text description of the required result. 
 
+### Getting Started
+```commandline
+pip install charmr
+```
+
+### Set OpenAI API Key
+```commandline
+export OPENAI_API_KEY=<your open ai api key>
+```
+
 ### Usage
 ```options:
   -h, --help            show this help message and exit
@@ -22,7 +32,7 @@ This application will convert, transform, filter etc. any text based common file
 * then you can specify `--alias` without providing `--conversion` to repeat the same conversion.  
 * define `--view_code_only` will only print out the code without running it. Use this to review generated code for safety. Specifying `--alias` will save it to be reused.  
 
-e.g. `python main.py -i input.csv -o output.json -c "convert csv to json" `
+e.g. `charmr -i input.csv -o output.json -c "convert csv to json" `
 
 ### Examples
 #### Basic conversion
@@ -73,3 +83,4 @@ It also depends on the conversion string correctly describing the input and the 
 
 
 ### Security / Safety
+Input file data never leaves your local machine. Only the conversion description is sent to OpanAI to generate the conversion code.
