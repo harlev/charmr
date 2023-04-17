@@ -1,7 +1,14 @@
 # charmr
-#### a Magical File Converter
+#### a Magical AI File Converter
 
-This application will convert, transform, filter etc. any text based common file format into another file, based on a text description of the required result. 
+[![PyPI version](https://badge.fury.io/py/charmr.svg)](https://badge.fury.io/py/charmr)
+<a href="https://github.com/harlev/charmr/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg" target="_blank" />
+</a>
+[![Downloads](https://pepy.tech/badge/charmr)](https://pepy.tech/project/charmr)
+
+This application will convert, transform, filter etc. any text based common file format into another file, based on a text description of the required result.  
+It is using GPT-3.5 to generate code that will run the conversion locally. The actual input data is not being sent outside of the local machine.
 
 ### Getting Started
 ```commandline
