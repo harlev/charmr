@@ -55,7 +55,7 @@ a, b, c
 1, 2, 3
 4, 5, 6
 ```
-conversion `the input file is a CSV with column heasers a,b,c. the output file is a CSV. create a new column ac with the multiplication of a and c`  
+conversion `the input file is a CSV with column headers a,b,c. the output file is a CSV. create a new column ac with the multiplication of a and c`  
 output `csv`
 ```
 a,b,c,ac
@@ -83,4 +83,4 @@ It also depends on the conversion string correctly describing the input and the 
 
 
 ### Security / Safety
-Input file data never leaves your local machine. Only the conversion description is sent to OpanAI to generate the conversion code.
+Input file data never leaves your local machine. Only the conversion description is sent to OpenAI to generate the conversion code.
