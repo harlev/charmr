@@ -11,3 +11,7 @@ class Test(TestCase):
     def test_get_code(self):
         result = ai.get_code("convert csv to json")
         print(result)
+
+    def test_get_code_gpt4(self):
+        result = ai.get_code("convert csv to json", "gpt-4")
+        print(result)

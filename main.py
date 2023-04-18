@@ -12,6 +12,7 @@ def parse_arguments():
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=False)
     parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
     parser.add_argument('--view_code_only', '-v', help='View code without running', action='store_true')
+    parser.add_argument('--gpt_4', '-4', help='Use GPT-4', action='store_true')
     args = parser.parse_args()
     return args
 
@@ -34,7 +35,10 @@ def main():
     input_file_content = read_input_file(args.input_file)
 
     if args.conversion:
-        conversion_code = ai.get_code(args.conversion)
+        if args.gpt_4:
+            conversion_code = ai.get_code(args.conversion, "gpt-4")
+        else:
+            conversion_code = ai.get_code(args.conversion)
         if args.alias:
             alias_manager.save_code(conversion_code, args.alias)
     else:

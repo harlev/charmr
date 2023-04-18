@@ -13,11 +13,11 @@ prefer string manipulation over using external packages where possible.
 Do not output any explanation."""
 
 
-def get_code(prompt: str):
+def get_code(prompt: str, model="gpt-3.5-turbo"):
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model=model,
         messages=[
             {"role": "system", "content": f"{SYSTEM}"},
             {"role": "user", "content": f"{prompt}"},
