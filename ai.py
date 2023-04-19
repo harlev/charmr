@@ -13,8 +13,18 @@ prefer string manipulation over using external packages where possible.
 Do not output any explanation."""
 
 
-def get_code(prompt: str, model="gpt-3.5-turbo"):
+prompt_with_rows = """
+{prompt}. 
+here are the first rows of the input file, use them to understand the file structure: 
+{header_rows}
+"""
+
+
+def get_code(prompt: str, model="gpt-3.5-turbo", header_rows=None):
     openai.api_key = os.getenv("OPENAI_API_KEY")
+
+    if header_rows:
+        prompt = prompt_with_rows.format(prompt=prompt, header_rows=header_rows)
 
     response = openai.ChatCompletion.create(
         model=model,
