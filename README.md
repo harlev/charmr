@@ -66,7 +66,10 @@ cat input.csv | charmr -4 -c "convert the csv to json and keep just the first an
 Emulating the `cut` utility:  
 `cat input.csv | cut -d"," -f2`  
 Same thing with `charmr`  
-`cat input.csv | charmr -4 -c "read the csv and keep only the second column"`
+`cat input.csv | charmr -4 -c "read the csv and keep only the second column"`  
+
+Then combining transformation and filtering  
+`cat input.csv | charmr -4 -c "read the csv, remove the header row, keep only the second column and output the square of the values"`
 
 ### Examples
 #### Basic conversion
