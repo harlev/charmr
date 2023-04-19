@@ -8,7 +8,7 @@
 [![Downloads](https://pepy.tech/badge/charmr)](https://pepy.tech/project/charmr)
 
 This application will convert, transform, filter etc. any text based common file format into another file, based on a text description of the required result.  
-It is using GPT-3.5 to generate code that will run the conversion locally. The actual input data is not being sent outside of the local machine.
+It is using GPT-3.5/4 to generate code that will run the conversion locally. The actual input data is not being sent outside of the local machine.
 
 ### Getting Started
 ```commandline
@@ -22,6 +22,7 @@ export OPENAI_API_KEY=<your open ai api key>
 
 ### Usage
 ```options:
+options:
   -h, --help            show this help message and exit
   --input_file INPUT_FILE, -i INPUT_FILE
                         Input file
@@ -32,14 +33,22 @@ export OPENAI_API_KEY=<your open ai api key>
   --alias ALIAS, -a ALIAS
                         Conversion alias, for reuse
   --view_code_only, -v  View code without running
+  --gpt_4, -4           Use GPT-4
+  --include_input_rows INCLUDE_INPUT_ROWS, -r INCLUDE_INPUT_ROWS
+                        Include N input rows in prompt
+
   ```
 
-* define `--input_file`, `--output_file` and `--conversion` for basic functionality.  
-* adding an `--alias` will save the conversion in a `.charmr` file.  
-* then you can specify `--alias` without providing `--conversion` to repeat the same conversion.  
-* define `--view_code_only` will only print out the code without running it. Use this to review generated code for safety. Specifying `--alias` will save it to be reused.  
+* Define `--input_file`, `--output_file` and `--conversion` for basic functionality.
+* Can also use stdin and/or stdout instead of defining in/out path.
+* Adding an `--alias` will save the conversion in a `.charmr` file.  
+* Then you can specify `--alias` without providing `--conversion` to repeat the same conversion.  
+* Define `--view_code_only` will only print out the code without running it. Use this to review generated code for safety. Specifying `--alias` will save it to be reused.
+* Use `--gpt_4` to use GPT-4 to generate code. Default is `gpt-3.5-turbo`
+* Specify `include_input_rows` with number of rows to include in prompt. This can improve code generation.
 
-e.g. `charmr -i input.csv -o output.json -c "convert csv to json" `
+e.g. `charmr -i input.csv -o output.json -c "convert csv to json"`  
+OR   `charmr -c "convert csv to json" < input.csv > output.json`
 
 ### Examples
 #### Basic conversion
@@ -90,4 +99,5 @@ It also depends on the conversion string correctly describing the input and the 
 
 
 ### Security / Safety
-Input file data never leaves your local machine. Only the conversion description is sent to OpenAI to generate the conversion code.
+Input file data never leaves your local machine. Only the conversion description is sent to OpenAI to generate the conversion code.  
+Note that using the '--include_input_rows N' option **will** send the first N rows of the input file to GPT to help with code generation accuracy
