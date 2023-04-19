@@ -1,3 +1,4 @@
+import sys
 from dotenv import load_dotenv
 import ai
 import argparse
@@ -7,7 +8,7 @@ import alias_manager
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Charmr - Magical File Converter')
-    parser.add_argument('--input_file', '-i', type=str, help='Input file', required=True)
+    parser.add_argument('--input_file', '-i', type=str, help='Input file', required=False)
     parser.add_argument('--output_file', '-o', type=str, help='Output file', required=True)
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=False)
     parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
@@ -45,8 +46,6 @@ def main():
     load_dotenv()
     args = parse_arguments()
 
-    input_file_content = read_input_file(args.input_file)
-
     if args.include_input_rows:
         first_lines = read_first_n_lines(args.input_file, args.include_input_rows)
     else:
@@ -69,8 +68,11 @@ def main():
             conversion_code = alias_manager.load_code(args.alias)
 
     if not args.view_code_only:
-        with open(args.input_file) as csv_file:
-            output_file_content = run_function(conversion_code, csv_file)
+        if args.input_file:
+            with open(args.input_file) as csv_file:
+                output_file_content = run_function(conversion_code, csv_file)
+        else: # use stdin
+            output_file_content = run_function(conversion_code, sys.stdin)
         write_output_file(args.output_file, output_file_content)
     else:
         print(conversion_code)
