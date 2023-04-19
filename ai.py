@@ -4,8 +4,11 @@ import os
 SYSTEM = """you are a file converter code generator. 
 You will get a description of the source and target files format, and any conversion, manipulation, 
 filtering or transformation to apply on the source to generate the target. 
-You will output a python function that accepts the source as a stream and returns the target file content as string.
+You will output a python function.
+The source input is a stream.
+The target output is a stream as well.
 The function name will be "file_convert". 
+function signature is "file_convert(input_stream, output_stream)"
 Generate only the code, with no comments. 
 Don't generate any wrapper to the code. 
 The output should be compilable as python code, version 3.8.

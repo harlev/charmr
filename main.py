@@ -9,7 +9,7 @@ import alias_manager
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Charmr - Magical File Converter')
     parser.add_argument('--input_file', '-i', type=str, help='Input file', required=False)
-    parser.add_argument('--output_file', '-o', type=str, help='Output file', required=True)
+    parser.add_argument('--output_file', '-o', type=str, help='Output file', required=False)
     parser.add_argument('--conversion', '-c', type=str, help='Conversion description', required=False)
     parser.add_argument('--alias', '-a', type=str, help='Conversion alias, for reuse', required=False)
     parser.add_argument('--view_code_only', '-v', help='View code without running', action='store_true')
@@ -37,9 +37,9 @@ def read_first_n_lines(file_path, n):
     return lines
 
 
-def write_output_file(file_path, file_content):
-    with open(file_path, 'w') as f:
-        f.write(file_content)
+def send_stream_to_stdout(stream):
+    for line in stream:
+        sys.stdout.write(line)
 
 
 def main():
@@ -69,11 +69,21 @@ def main():
 
     if not args.view_code_only:
         if args.input_file:
-            with open(args.input_file) as csv_file:
-                output_file_content = run_function(conversion_code, csv_file)
-        else: # use stdin
-            output_file_content = run_function(conversion_code, sys.stdin)
-        write_output_file(args.output_file, output_file_content)
+            in_stream = open(args.input_file, "r")
+        else:
+            in_stream = sys.stdin
+
+        if args.output_file:
+            out_stream = open(args.output_file, "w")
+        else:
+            out_stream = sys.stdout
+
+        run_function(conversion_code, in_stream, out_stream)
+        if args.input_file:
+            in_stream.close()
+        if args.output_file:
+            out_stream.close()
+
     else:
         print(conversion_code)
 

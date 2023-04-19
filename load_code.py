@@ -1,4 +1,4 @@
-def run_function(code_string, parameter):
+def run_function(code_string, in_stream, out_stream):
     # Compile the code string
     compiled_code = compile(code_string, '<string>', 'exec')
 
@@ -12,7 +12,7 @@ def run_function(code_string, parameter):
     function = function_namespace.get('file_convert')
 
     # Call the function with the given parameter
-    result = function(parameter)
+    result = function(in_stream, out_stream)
 
     # Return the result
     return result
