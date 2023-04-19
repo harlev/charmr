@@ -48,7 +48,25 @@ options:
 * Specify `include_input_rows` with number of rows to include in prompt. This can improve code generation.
 
 e.g. `charmr -i input.csv -o output.json -c "convert csv to json"`  
-OR   `charmr -c "convert csv to json" < input.csv > output.json`
+OR   `charmr -c "convert csv to json" < input.csv > output.json`  
+OR a more fluent use
+```
+cat input.csv | charmr -4 -c "convert the csv to json and keep just the first and third columns" | jq .
+[
+  {
+    "a": "1",
+    "c": "3"
+  },
+  {
+    "a": "4",
+    "c": "6"
+  }
+]
+```  
+Emulating the `cut` utility:  
+`cat input.csv | cut -d"," -f2`  
+Same thing with `charmr`  
+`cat input.csv | charmr -4 -c "read the csv and keep only the second column"`
 
 ### Examples
 #### Basic conversion
