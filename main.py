@@ -36,7 +36,6 @@ def read_first_n_lines(file_path, n):
     return lines
 
 
-
 def write_output_file(file_path, file_content):
     with open(file_path, 'w') as f:
         f.write(file_content)
@@ -60,6 +59,7 @@ def main():
 
     if args.conversion:
         conversion_code = ai.get_code(args.conversion, model=model_name, header_rows=first_lines)
+
         if args.alias:
             alias_manager.save_code(conversion_code, args.alias)
     else:
@@ -69,7 +69,8 @@ def main():
             conversion_code = alias_manager.load_code(args.alias)
 
     if not args.view_code_only:
-        output_file_content = run_function(conversion_code, input_file_content)
+        with open(args.input_file) as csv_file:
+            output_file_content = run_function(conversion_code, csv_file)
         write_output_file(args.output_file, output_file_content)
     else:
         print(conversion_code)
