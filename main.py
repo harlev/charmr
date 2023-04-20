@@ -19,15 +19,24 @@ def parse_arguments():
     return args
 
 
-def read_first_n_lines(file_path, n):
-    with open(file_path, 'r') as f:
-        lines = []
-        for i in range(n):
-            line = f.readline()
-            if line:
-                lines.append(line)
-            else:
-                break
+def read_first_n_lines(in_file, n):
+    if in_file:
+        in_stream = open(in_file, "r")
+    else:
+        in_stream = sys.stdin
+
+    lines = []
+    for i in range(n):
+        line = in_stream.readline()
+        if line:
+            lines.append(line)
+        else:
+            break
+
+    if in_file:
+        in_stream.close()
+    else:
+        in_stream.seek(0)
     return lines
 
 
