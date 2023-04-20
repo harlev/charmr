@@ -19,12 +19,6 @@ def parse_arguments():
     return args
 
 
-def read_input_file(file_path):
-    with open(file_path, 'r') as f:
-        file_content = f.read()
-    return file_content
-
-
 def read_first_n_lines(file_path, n):
     with open(file_path, 'r') as f:
         lines = []
