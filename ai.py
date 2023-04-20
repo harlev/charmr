@@ -6,6 +6,7 @@ You will get a description of the source and target files format, and any conver
 filtering or transformation to apply on the source to generate the target. 
 You will output a python function.
 The source input is a stream.
+skip empty lines or lines with only whitespace in the input stream.
 The target output is a stream as well.
 The function name will be "file_convert". 
 function signature is "file_convert(input_stream, output_stream)"
