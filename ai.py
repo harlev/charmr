@@ -12,6 +12,7 @@ The function name will be "file_convert".
 function signature is "file_convert(input_stream, output_stream)"
 Generate only the code, with no comments. 
 Don't generate any wrapper to the code. 
+Don't prefix the code with "python"
 The output should be compilable as python code, version 3.8.
 prefer string manipulation over using external packages where possible. 
 Do not output any explanation."""

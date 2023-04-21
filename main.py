@@ -30,30 +30,18 @@ def get_seekable_stream(stream):
 
         temp_file.seek(0)
 
-        return io.BufferedReader(temp_file)
+        return io.TextIOWrapper(temp_file, encoding='utf-8')
 
 
-def read_first_n_lines(in_file, n):
-    if in_file:
-        in_stream = open(in_file, "r")
-    else:
-        in_stream = get_seekable_stream(sys.stdin)
-
+def read_first_n_lines(in_stream, n):
     lines = []
-    count = 0
-    for line in in_stream:
-        count += 1
+    for i in range(n):
+        line = in_stream.readline()
         if line:
             lines.append(line)
         else:
             break
-        if count == int(n):
-            break
 
-    if in_file:
-        in_stream.close()
-    else:
-        in_stream.seek(0)
     return lines
 
 
@@ -66,10 +54,20 @@ def main():
     load_dotenv()
     args = parse_arguments()
 
+    if args.input_file:
+        in_stream = open(args.input_file, "r")
+    else:
+        in_stream = get_seekable_stream(sys.stdin)
+
     if args.include_input_rows:
-        first_lines = read_first_n_lines(args.input_file, args.include_input_rows)
+        first_lines = read_first_n_lines(in_stream, args.include_input_rows)
     else:
         first_lines = None
+
+    if args.input_file:
+        in_stream.close()
+    else:
+        in_stream.seek(0)
 
     if args.gpt_4:
         model_name = "gpt-4"
@@ -90,8 +88,6 @@ def main():
     if not args.view_code_only:
         if args.input_file:
             in_stream = open(args.input_file, "r")
-        else:
-            in_stream = sys.stdin
 
         if args.output_file:
             out_stream = open(args.output_file, "w")
