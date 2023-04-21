@@ -1,4 +1,6 @@
 import sys
+import io
+import tempfile
 from dotenv import load_dotenv
 import ai
 import argparse
@@ -19,18 +21,33 @@ def parse_arguments():
     return args
 
 
+def get_seekable_stream(stream):
+    if stream.seekable():
+        return stream
+    else:
+        temp_file = tempfile.TemporaryFile()
+        temp_file.write(stream.read().encode())
+
+        temp_file.seek(0)
+
+        return io.BufferedReader(temp_file)
+
+
 def read_first_n_lines(in_file, n):
     if in_file:
         in_stream = open(in_file, "r")
     else:
-        in_stream = sys.stdin
+        in_stream = get_seekable_stream(sys.stdin)
 
     lines = []
-    for i in range(n):
-        line = in_stream.readline()
+    count = 0
+    for line in in_stream:
+        count += 1
         if line:
             lines.append(line)
         else:
+            break
+        if count == int(n):
             break
 
     if in_file:
@@ -89,7 +106,7 @@ def main():
 
     else:
         print(conversion_code)
-        
+
 
 if __name__ == "__main__":
     main()
