@@ -1,3 +1,4 @@
 openai
 python-dotenv
 streamlit
+streamlit-scrollable-textbox

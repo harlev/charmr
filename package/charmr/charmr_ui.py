@@ -4,6 +4,7 @@ from io import StringIO
 from ai import get_code
 from load_code import run_function
 from dotenv import load_dotenv
+import streamlit_scrollable_textbox as stx
 
 load_dotenv()
 
@@ -11,7 +12,7 @@ uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # To read file as bytes:
     bytes_data = uploaded_file.getvalue()
-    st.write(bytes_data)
+    stx.scrollableTextbox(str(bytes_data), height=500, border=False)
 
 conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
 if st.button("Apply transformation"):
