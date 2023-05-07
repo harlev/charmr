@@ -8,6 +8,14 @@ import streamlit_scrollable_textbox as stx
 
 load_dotenv()
 
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
 st.markdown("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JL75GXLFJC"></script>
@@ -19,13 +27,6 @@ st.markdown("""
   gtag('config', 'G-JL75GXLFJC');
 </script>
 """, unsafe_allow_html=True)
-
-hide_menu_style = """
-        <style>
-        #MainMenu {visibility: hidden;}
-        </style>
-        """
-st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
