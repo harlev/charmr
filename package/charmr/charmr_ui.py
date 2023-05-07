@@ -16,13 +16,15 @@ if uploaded_file is not None:
 
     conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
     if st.button("Apply transformation"):
-        conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=None)
-        with st.expander("Conversion Code", expanded=False):
+        with st.spinner("AI Processing Request"):
+            conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=None)
+        with st.expander("Transformation Code", expanded=False):
             st.code(conversion_code, language='python')
 
-        memory_buffer = io.StringIO()
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        run_function(conversion_code, stringio, memory_buffer)
+        with st.spinner("Running Transformation Code"):
+            memory_buffer = io.StringIO()
+            stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+            run_function(conversion_code, stringio, memory_buffer)
 
         st.write(memory_buffer.getvalue())
 
