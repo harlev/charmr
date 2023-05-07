@@ -14,22 +14,22 @@ if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     stx.scrollableTextbox(str(bytes_data), height=500, border=False)
 
-conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
-if st.button("Apply transformation"):
-    conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=None)
-    with st.expander("Conversion Code", expanded=False):
-        st.code(conversion_code, language='python')
+    conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
+    if st.button("Apply transformation"):
+        conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=None)
+        with st.expander("Conversion Code", expanded=False):
+            st.code(conversion_code, language='python')
 
-    memory_buffer = io.StringIO()
-    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    run_function(conversion_code, stringio, memory_buffer)
+        memory_buffer = io.StringIO()
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+        run_function(conversion_code, stringio, memory_buffer)
 
-    st.write(memory_buffer.getvalue())
+        st.write(memory_buffer.getvalue())
 
-    st.download_button(
-        label="Download Result",
-        data=memory_buffer.getvalue(),
-        file_name='result.txt',
-        # mime='text/csv',
-    )
+        st.download_button(
+            label="Download Result",
+            data=memory_buffer.getvalue(),
+            file_name='result.txt',
+            # mime='text/csv',
+        )
 
