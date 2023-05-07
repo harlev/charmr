@@ -8,6 +8,18 @@ import streamlit_scrollable_textbox as stx
 
 load_dotenv()
 
+st.markdown("""
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JL75GXLFJC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JL75GXLFJC');
+</script>
+""", unsafe_allow_html=True)
+
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # To read file as bytes:
