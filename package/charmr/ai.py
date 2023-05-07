@@ -13,7 +13,8 @@ Generate only the code, with no comments..
 Don't generate any wrapper to the code. 
 The output should be compilable as python code, version 3.8.
 prefer string manipulation over using external packages where possible. 
-Do not output any explanation."""
+Do not output any explanation.
+Do not write 'python' at the start of the code"""
 
 
 prompt_with_rows = """
