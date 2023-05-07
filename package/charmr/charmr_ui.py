@@ -12,7 +12,7 @@ uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # To read file as bytes:
     bytes_data = uploaded_file.getvalue()
-    stx.scrollableTextbox(str(bytes_data), height=500, border=False)
+    stx.scrollableTextbox(str(bytes_data), height=300, border=False)
 
     conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
     if st.button("Apply transformation"):
