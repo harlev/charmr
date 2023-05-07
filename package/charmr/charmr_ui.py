@@ -20,6 +20,13 @@ st.markdown("""
 </script>
 """, unsafe_allow_html=True)
 
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # To read file as bytes:
