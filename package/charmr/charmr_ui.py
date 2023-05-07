@@ -8,6 +8,11 @@ import streamlit_scrollable_textbox as stx
 
 load_dotenv()
 
+st.set_page_config(
+    page_title="Charmr - AI File Transform",
+    page_icon=":magic-wand:",
+)
+
 hide_menu_style = """
         <style>
         #MainMenu {visibility: hidden;}
@@ -32,7 +37,6 @@ hide_menu_style = """
         </style>
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
-
 
 st.markdown("""
 <!-- Google tag (gtag.js) -->
