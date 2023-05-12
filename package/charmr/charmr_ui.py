@@ -39,6 +39,20 @@ hide_menu_style = """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
 
 st.title("Charmr AI")
+st.markdown("""
+Use the power of AI to transform files, using a plain text description.  
+Get the command line version [GitHub](https://github.com/harlev/charmr)  
+Install the [Python package](https://pypi.org/project/charmr/)  
+  
+#### Examples
+These are the commands you can use to tranform your files. The examples deal with CSV and JSOM, but other file format should work too.
+* convert csv to json
+* read the csv, remove the header row, keep only the second column and output the square of the values
+* input a csv file with day,month,year column headers. output a JSON file with an extra field which is the unix timestamp for the date represented in each row  
+  
+**Note:** The AI is clever and creative. But it is not perfect. You may need to use some *Prompt Engineering* to get the result you want
+
+""")
 
 uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
