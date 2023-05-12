@@ -1,5 +1,6 @@
 import streamlit as st
 import io
+import os
 import traceback
 from io import StringIO
 from ai import get_code
@@ -8,9 +9,19 @@ from dotenv import load_dotenv
 import streamlit_scrollable_textbox as stx
 import logging
 
+LOG_FILE_NAME = "charmr_ui.log"
+
 load_dotenv()
 
-logging.basicConfig(filename="charmr_ui.log",
+query_params = st.experimental_get_query_params()
+if "show_log" in query_params and query_params["show_log"][0] == os.getenv("LOG_KEY"):
+    with open(LOG_FILE_NAME, mode="r") as f:
+        contents = f.readlines()
+        st.write(contents)
+        st.stop()
+
+
+logging.basicConfig(filename=LOG_FILE_NAME,
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
