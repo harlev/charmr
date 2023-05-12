@@ -1,12 +1,23 @@
 import streamlit as st
 import io
+import traceback
 from io import StringIO
 from ai import get_code
 from load_code import run_function
 from dotenv import load_dotenv
 import streamlit_scrollable_textbox as stx
+import logging
 
 load_dotenv()
+
+logging.basicConfig(filename="charmr_ui.log",
+                    filemode='a',
+                    format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                    datefmt='%H:%M:%S',
+                    level=logging.INFO)
+
+logging.info("Page Load/Refresh")
+
 
 st.set_page_config(
     page_title="Charmr - AI File Transform",
@@ -58,6 +69,8 @@ uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     # To read file as bytes:
     input_stringio = uploaded_file.getvalue().decode("utf-8")
+    logging.info(f"File uploaded: {input_stringio[:100]}")
+
     with st.expander("Input File", expanded=True):
         stx.scrollableTextbox(input_stringio, height=300, border=False)
 
@@ -65,18 +78,25 @@ if uploaded_file is not None:
 
     conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
     if st.button("Apply transformation"):
+        logging.info(f"Conversion initiated. text: {conversion_text}")
         with st.spinner("AI Processing Request"):
             conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=input_sample)
+            logging.info(f"Conversion code: {conversion_code}")
         with st.expander("Transformation Code", expanded=False):
             st.code(conversion_code, language='python')
 
         with st.spinner("Running Transformation Code"):
             memory_buffer = io.StringIO()
             stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-            run_function(conversion_code, stringio, memory_buffer)
+            try:
+                run_function(conversion_code, stringio, memory_buffer)
+            except Exception as e:
+                logging.error(f"Conversion Error: {traceback.format_exc()}")
+                raise e
 
         formatTed_output = memory_buffer.getvalue().replace("\n", "  \n")
         st.write(formatTed_output)
+        logging.info(f"Conversion output: {formatTed_output}")
 
         st.download_button(
             label="Download Result",
