@@ -75,7 +75,8 @@ if uploaded_file is not None:
             stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
             run_function(conversion_code, stringio, memory_buffer)
 
-        st.write(memory_buffer.getvalue())
+        formatTed_output = memory_buffer.getvalue().replace("\n", "  \n")
+        st.write(formatTed_output)
 
         st.download_button(
             label="Download Result",
