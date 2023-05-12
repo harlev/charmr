@@ -47,10 +47,12 @@ if uploaded_file is not None:
     with st.expander("Input File", expanded=True):
         stx.scrollableTextbox(input_stringio, height=300, border=False)
 
+    input_sample = input_stringio[:1000]
+
     conversion_text = st.text_area("Transformation Text", placeholder="write description of transformation here")
     if st.button("Apply transformation"):
         with st.spinner("AI Processing Request"):
-            conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=None)
+            conversion_code = get_code(conversion_text, model="gpt-3.5-turbo", header_rows=input_sample)
         with st.expander("Transformation Code", expanded=False):
             st.code(conversion_code, language='python')
 

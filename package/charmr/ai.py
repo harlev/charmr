@@ -30,6 +30,8 @@ def get_code(prompt: str, model="gpt-3.5-turbo", header_rows=None):
     if header_rows:
         prompt = prompt_with_rows.format(prompt=prompt, header_rows=header_rows)
 
+    print(prompt)
+
     response = openai.ChatCompletion.create(
         model=model,
         messages=[
