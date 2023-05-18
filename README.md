@@ -10,6 +10,8 @@
 This application will convert, transform, filter etc. any text based common file format into another file, based on a text description of the required result.  
 It is using GPT-3.5/4 to generate code that will run the conversion locally. The actual input data is not being sent outside of the local machine.
 
+Try it live at [charmrai.com](https://charmrai.com)
+
 ### Getting Started
 ```commandline
 pip install charmr
