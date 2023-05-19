@@ -17,6 +17,7 @@ query_params = st.experimental_get_query_params()
 if "show_log" in query_params and query_params["show_log"][0] == os.getenv("LOG_KEY"):
     with open(LOG_FILE_NAME, mode="r") as f:
         contents = f.readlines()
+        contents = [c for c in contents if "Load/Refresh" not in c]
         st.write(contents)
         st.stop()
 
