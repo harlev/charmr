@@ -25,7 +25,7 @@ if "show_log" in query_params and query_params["show_log"][0] == os.getenv("LOG_
 logging.basicConfig(filename=LOG_FILE_NAME,
                     filemode='a',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
-                    datefmt='%H:%M:%S',
+                    datefmt='%Y-%m-%d %H:%M:%S',
                     level=logging.INFO)
 
 logging.info("Page Load/Refresh")
